@@ -1,15 +1,21 @@
+// discord를 노드 모듈에서 불러온다.
 const Discord = require('discord.js');
+// config 세팅
 const { prefix, token } = require('./config.json');
+// 생성자로 client를 생성한다.
 const client = new Discord.Client();
 
+// 클라이언트가 레디되면 console.에 찍어준다.
 client.once('ready', () => {
   console.log('Ready!');
 });
 
+// 클라이언트가 메세지를 하면 발동한다.
 client.on('message', message => {
   // message not srtart with '!' prefix .. then return
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
+  // args
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
