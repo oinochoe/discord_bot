@@ -10,11 +10,11 @@ client.on('message', message => {
   // message not srtart with '!' prefix .. then return
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-  const args = message.content.slice(prefix.length).split(' ');
+  const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
-  if (message.content.startsWith(`${prefix}ping`)) {
-    message.channel.send('Pong.');
+  if (message.content.startsWith(`${prefix}자기야 잘자`)) {
+    message.channel.send('윽 토하겠네.');
   } else if (message.content.startsWith(`${prefix}beep`)) {
     message.channel.send('Boop.');
   } else if (message.content === `${prefix}server`) {
@@ -30,8 +30,11 @@ client.on('message', message => {
       return message.channel.send(
         `You didn't provide any arguments, ${message.author}!`,
       );
+    } else if (args[0] === 'foo') {
+      return message.channel.send('bar');
     }
-    message.channel.send(`Command name: ${command}\nArguments: ${args}`);
+
+    message.channel.send(`First argument: ${args[0]}`);
   }
 });
 
