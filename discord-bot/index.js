@@ -17,8 +17,23 @@ client.on('guildMemberAdd', member => {
   channel.send(`Welcome to the server, ${member}`);
 });
 
+client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.find(ch => ch.name === 'welcome-check');
+  if (!channel) return;
+  client.channels
+    .get('585342619023048704')
+    .send(`h-hi ${member}... i'm testBot, nic eto meet you :)`);
+});
+
 // 클라이언트가 메세지를 하면 발동한다.
 client.on('message', message => {
+  if (message.content === '>arch') {
+    const attachment = new Attachment(
+      'https://cdn.discordapp.com/emojis/669325264232251402.png',
+    );
+    message.channel.send(attachment);
+  }
+
   // message not srtart with '!' prefix .. then return
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
